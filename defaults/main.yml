@@ -1,0 +1,9 @@
+---
+# defaults file for ansible-gitlab-runner
+gitlab_runner_debian_package:
+  key: '{{ gitlab_runner_uri }}/gpgkey'
+  package: '{{ gitlab_runner_uri }}/packages/{{ ansible_distribution|lower }}/{{ ansible_distribution_release|lower }}/gitlab-ci-multi-runner_{{ gitlab_runner_version }}_amd64.deb'
+
+gitlab_runner_uri: 'https://packages.gitlab.com/runner/gitlab-ci-multi-runner'
+
+gitlab_runner_version: '1.9.9'
