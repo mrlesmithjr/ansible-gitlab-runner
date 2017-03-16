@@ -9,7 +9,7 @@
 
 - name: debian | Adding GitLab Runner GPG Key
   apt_key:
-    key: "{{ gitlab_runner_debian_package.key }}"
+    url: "{{ gitlab_runner_debian_package.key }}"
     state: "present"
 
 - name: debian | Installing GitLab Runner Package
