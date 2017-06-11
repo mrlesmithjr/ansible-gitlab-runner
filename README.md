@@ -1,38 +1,67 @@
-Role Name
-=========
+# Role Name
 
-A brief description of the role goes here.
+An [Ansible] role to install/configure [GitLab] - [runner]
 
-Requirements
-------------
+## Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+None
 
-Role Variables
---------------
+## Role Variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+```yaml
+---
+# defaults file for ansible-gitlab-runner
+gitlab_runner_check_interval: 0
+gitlab_runner_concurrent_jobs: 1
 
-Dependencies
-------------
+gitlab_runner_config:
+  url: 'https://gitlab.com/ci'
+  token: ''
+  executor: 'shell'
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+gitlab_runner_debian_package:
+  key: '{{ gitlab_runner_uri }}/gpgkey'
+  package: '{{ gitlab_runner_uri }}/packages/{{ ansible_distribution|lower }}/{{ ansible_distribution_release|lower }}/gitlab-ci-multi-runner_{{ gitlab_runner_version }}_amd64.deb'
+  repos:
+    - 'deb https://packages.gitlab.com/runner/gitlab-ci-multi-runner/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release|lower }} main'
+    - 'deb-src https://packages.gitlab.com/runner/gitlab-ci-multi-runner/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release|lower }} main'
 
-Example Playbook
-----------------
+gitlab_runner_uri: 'https://packages.gitlab.com/runner/gitlab-ci-multi-runner'
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+gitlab_runner_version: 9.2.0
+```
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+## Dependencies
 
-License
--------
+None
+
+## Example Playbook
+
+```yaml
+---
+- hosts: gitlab_runner
+  vars:
+  roles:
+    - role: ansible-gitlab-runner
+  tasks:
+```
+
+## License
 
 BSD
 
-Author Information
-------------------
+## Author Information
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Larry Smith Jr.
+
+-   [@mrlesmithjr]
+-   <http://everythingshouldbevirtual.com>
+-   mrlesmithjr [at] gmail.com
+
+[@mrlesmithjr]: https://www.twitter.com/mrlesmithjr
+
+[ansible]: https://www.ansible.com
+
+[gitlab]: https://www.gitlab.com
+
+[runner]: https://docs.gitlab.com/runner/
