@@ -5,5 +5,6 @@
   changed_when: false
 
 - name: config | Register GitLab Runner
-  command: "gitlab-runner register -n -u {{ gitlab_runner_config.url }} -r {{ gitlab_runner_config.token }} --executor {{ gitlab_runner_config.executor }}"
-  when: gitlab_runners.stderr.find('\n{{ ansible_hostname }}') == -1
+  command: "gitlab-runner register -n -u {{ gitlab_runner_config['url'] }} -r {{ gitlab_runner_config['token'] }} --executor {{ gitlab_runner_config['executor'] }}"
+  become: true
+  when: gitlab_runners['stderr']['find']('\n{{ ansible_hostname }}') == -1

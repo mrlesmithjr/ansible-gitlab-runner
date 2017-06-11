@@ -1,7 +1,7 @@
 ---
 # defaults file for ansible-gitlab-runner
-gitlab_runner_check_interval: '0'
-gitlab_runner_concurrent_jobs: '1'
+gitlab_runner_check_interval: 0
+gitlab_runner_concurrent_jobs: 1
 
 gitlab_runner_config:
   url: 'https://gitlab.com/ci'
@@ -17,4 +17,4 @@ gitlab_runner_debian_package:
 
 gitlab_runner_uri: 'https://packages.gitlab.com/runner/gitlab-ci-multi-runner'
 
-gitlab_runner_version: '9.0.2'
+gitlab_runner_version: 9.2.0
