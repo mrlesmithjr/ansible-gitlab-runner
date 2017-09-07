@@ -1,6 +1,7 @@
 ---
 - name: config | Listing Registered GitLab Runners
   command: gitlab-runner list
+  become: true
   register: gitlab_runners
   changed_when: false
 
