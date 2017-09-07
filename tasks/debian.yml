@@ -5,8 +5,8 @@
     state: present
   become: true
   with_items:
-    - 'debian-archive-keyring'
-    - 'apt-transport-https'
+    - debian-archive-keyring
+    - apt-transport-https
 
 - name: debian | Adding GitLab Runner GPG Key
   apt_key:
