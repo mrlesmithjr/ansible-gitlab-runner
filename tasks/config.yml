@@ -5,7 +5,7 @@
   register: gitlab_runners
   changed_when: false
 
-- name: config | Register GitLab Runner
+- name: config | Register GitLab Runner # noqa 102
   command: >
     gitlab-runner register --name {{ inventory_hostname }} \
     --non-interactive \
