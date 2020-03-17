@@ -4,3 +4,4 @@
   service:
     name: gitlab-runner
     state: restarted
+  become: true

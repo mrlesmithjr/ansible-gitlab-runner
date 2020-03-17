@@ -4,18 +4,19 @@
     repo: "{{ item }}"
     state: absent
   become: true
-  with_items:
+  loop:
     - "deb {{ gitlab_runner_uri_previous }}/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release|lower }} main"
     - "deb-src {{ gitlab_runner_uri_previous }}/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release|lower }} main"
 
 - name: debian | Installing Pre-Reqs
   apt:
-    name: "{{ item }}"
+    name:
+      - debian-archive-keyring
+      - apt-transport-https
     state: present
   become: true
-  with_items:
-    - debian-archive-keyring
-    - apt-transport-https
+  register: result
+  until: result is successful
 
 - name: debian | Adding GitLab Runner GPG Key
   apt_key:
@@ -28,7 +29,7 @@
     repo: "{{ item }}"
     state: present
   become: true
-  with_items: "{{ gitlab_runner_debian_package['repos'] }}"
+  loop: "{{ gitlab_runner_debian_package['repos'] }}"
 
 - name: debian | Pinning GitLab Repo
   template:

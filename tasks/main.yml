@@ -4,5 +4,7 @@
   when: ansible_os_family == "Debian"
 
 - include: config.yml
+  when:
+    - gitlab_runner_config['configure']|bool
 
 - include: users.yml

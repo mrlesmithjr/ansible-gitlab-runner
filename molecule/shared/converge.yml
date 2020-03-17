@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: Include ansible-gitlab-runner
+      include_role:
+        name: ansible-gitlab-runner

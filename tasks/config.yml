@@ -6,6 +6,12 @@
   changed_when: false
 
 - name: config | Register GitLab Runner
-  command: "gitlab-runner register -n -u {{ gitlab_runner_config['url'] }} -r {{ gitlab_runner_config['token'] }} --executor {{ gitlab_runner_config['executor'] }}"
+  command: >
+    gitlab-runner register --name {{ inventory_hostname }} \
+    --non-interactive \
+    --url {{ gitlab_runner_config['url'] }} \
+    --registration-token {{ gitlab_runner_config['token'] }} \
+    --executor {{ gitlab_runner_config['executor'] }} \
+    --tag-list {{ gitlab_runner_tags|join(',') }}
   become: true
-  when: gitlab_runners['stderr']['find']('\n{{ ansible_hostname }}') == -1
+  when: gitlab_runners['stderr']['find']('\n{{ inventory_hostname }}') == -1

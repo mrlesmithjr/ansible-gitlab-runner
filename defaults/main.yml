@@ -8,6 +8,7 @@ gitlab_runner_config:
   # runner token needs to be replaced
   token: TOKEN
   executor: shell
+  configure: false
 
 gitlab_runner_debian_package:
   key: "{{ gitlab_runner_uri }}/gpgkey"
@@ -16,9 +17,16 @@ gitlab_runner_debian_package:
     - "deb {{ gitlab_runner_uri }}/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release|lower }} main"
     - "deb-src {{ gitlab_runner_uri }}/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release|lower }} main"
 
+# Define list of tags
+gitlab_runner_tags:
+  []
+  # - prod
+  # - dev
+  # - stg
+
 gitlab_runner_uri: https://packages.gitlab.com/runner/gitlab-runner
 
 # We need to cleanup previous repos using this
 gitlab_runner_uri_previous: https://packages.gitlab.com/runner/gitlab-ci-multi-runner
 
-gitlab_runner_version: 11.5.0
+gitlab_runner_version: 12.8.0
