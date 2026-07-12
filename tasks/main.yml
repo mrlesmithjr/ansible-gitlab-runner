@@ -1,10 +1,10 @@
 ---
 # tasks file for ansible-gitlab-runner
-- include: debian.yml
+- include_tasks: debian.yml
   when: ansible_os_family == "Debian"
 
-- include: config.yml
+- include_tasks: config.yml
   when:
     - gitlab_runner_config['configure']|bool
 
-- include: users.yml
+- include_tasks: users.yml

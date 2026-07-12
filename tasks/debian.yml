@@ -13,6 +13,7 @@
     name:
       - debian-archive-keyring
       - apt-transport-https
+      - gnupg
     state: present
   become: true
   register: result

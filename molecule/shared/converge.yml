@@ -1,7 +1,13 @@
 ---
 - name: Converge
   hosts: all
+  vars:
+    # gitlab_runner_version defaults to 12.8.0, which no longer exists in
+    # GitLab's apt repo for any currently-supported distro -- override for
+    # this scenario only, not the role default. See issue #5 for the real
+    # default-version follow-up.
+    gitlab_runner_version: "19.1.1-1"
   tasks:
     - name: Include ansible-gitlab-runner
       include_role:
-        name: ansible-gitlab-runner
+        name: mrlesmithjr.gitlab_runner
